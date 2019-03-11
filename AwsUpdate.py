@@ -19,16 +19,15 @@ def syncFolder(folder, command):
         f = open(filePath, "a")
         f.write("Error at " + currentDate.strftime("%Y-%m-%d %H:%M:%S") + ": " + e + "\n")
 
-
 def prepareSync():
     for folder in folders:
-
+        
         #Variable below is for syncing Workflow on Server
-        cmd = "aws s3 sync \"/Enter/Local/Path/Here/" + folder + "/\" \"s3://AWS-BUCKET-NAME/" + folder + "/\""
+        cmd = "aws s3 sync \"/Enter/Local/Path/Here/" + folder + "/\" \"s3://AWS-BUCKET-NAME/" + folder + "/\" --exclude \"*.idlk\" --exclude \"*.DS_Store\" --exclude \"*.apdisk\" --delete"
         
         #Variable below is for testing purposes
         #cmd = "aws s3 sync \"/Enter/Local/Path/Here/" + folder + "/\" \"s3://AWS-BUCKET-NAME/" + folder + "/\""
-
+        
         #Sends folder name and command to execute
         syncFolder(folder, cmd)
 
